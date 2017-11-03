@@ -61,13 +61,24 @@ public class TransitionCommande : MonoBehaviour {
         };
     }
 
-
     public float GetAxis(int dimension)
     {
+#if UNITY_ANDROID
+        if (dimension == 0)
+            return 3*Input.acceleration.y;
+        //else
+         //   return Input.acceleration.z;
+        else
+            return 3* Input.acceleration.x;
+
+
+#else
         if (dimension == 1)
             return Input.GetAxis("Horizontal");
         else 
             return Input.GetAxis("Vertical");
+
+#endif
     }
 
 
